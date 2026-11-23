@@ -1,0 +1,29 @@
+# Website Pimpinan Cabang Muhammadiyah (PCM)
+
+Website resmi PCM: profil organisasi, berita, agenda kegiatan, dan layanan
+aspirasi masyarakat. Seluruh konten dikelola pengurus melalui Django Admin
+tanpa mengubah kode.
+
+## Teknologi
+
+- Python 3.12 + Django 6.1
+- uv (manajemen dependensi, `pyproject.toml` + `uv.lock`)
+- SQLite (pengembangan lokal)
+- Bootstrap 5 + CSS/JS kustom (tema biru–putih identitas PCM)
+
+## Fitur
+
+- Beranda: hero, berita terbaru, agenda terdekat, majelis/bidang
+- Profil: sejarah, visi–misi, struktur pengurus, kontak & peta
+- Berita: kategori, pencarian, pagination, gambar, penulis, status publikasi
+- Agenda: status otomatis (akan datang / berlangsung / selesai)
+- Kontak: formulir tervalidasi + honeypot anti-spam, pesan masuk ke admin
+- Dashboard admin untuk seluruh konten
+
+## Menjalankan Lokal
+
+```bash
+uv sync
+uv run manage.py migrate
+uv run manage.py createsuperuser
+uv run manage.py runserver

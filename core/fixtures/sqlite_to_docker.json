@@ -1,0 +1,691 @@
+[
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Pesan Masyarakat",
+    "content_type": [
+      "core",
+      "contactmessage"
+    ],
+    "codename": "add_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Pesan Masyarakat",
+    "content_type": [
+      "core",
+      "contactmessage"
+    ],
+    "codename": "change_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Pesan Masyarakat",
+    "content_type": [
+      "core",
+      "contactmessage"
+    ],
+    "codename": "delete_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Pesan Masyarakat",
+    "content_type": [
+      "core",
+      "contactmessage"
+    ],
+    "codename": "view_contactmessage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Majelis/Bidang",
+    "content_type": [
+      "core",
+      "division"
+    ],
+    "codename": "add_division"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Majelis/Bidang",
+    "content_type": [
+      "core",
+      "division"
+    ],
+    "codename": "change_division"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Majelis/Bidang",
+    "content_type": [
+      "core",
+      "division"
+    ],
+    "codename": "delete_division"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Majelis/Bidang",
+    "content_type": [
+      "core",
+      "division"
+    ],
+    "codename": "view_division"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Profil Organisasi",
+    "content_type": [
+      "core",
+      "organizationprofile"
+    ],
+    "codename": "add_organizationprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Profil Organisasi",
+    "content_type": [
+      "core",
+      "organizationprofile"
+    ],
+    "codename": "change_organizationprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Profil Organisasi",
+    "content_type": [
+      "core",
+      "organizationprofile"
+    ],
+    "codename": "delete_organizationprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Profil Organisasi",
+    "content_type": [
+      "core",
+      "organizationprofile"
+    ],
+    "codename": "view_organizationprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Pengurus",
+    "content_type": [
+      "core",
+      "management"
+    ],
+    "codename": "add_management"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Pengurus",
+    "content_type": [
+      "core",
+      "management"
+    ],
+    "codename": "change_management"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Pengurus",
+    "content_type": [
+      "core",
+      "management"
+    ],
+    "codename": "delete_management"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Pengurus",
+    "content_type": [
+      "core",
+      "management"
+    ],
+    "codename": "view_management"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Ranting",
+    "content_type": [
+      "core",
+      "ranting"
+    ],
+    "codename": "add_ranting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Ranting",
+    "content_type": [
+      "core",
+      "ranting"
+    ],
+    "codename": "change_ranting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Ranting",
+    "content_type": [
+      "core",
+      "ranting"
+    ],
+    "codename": "delete_ranting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Ranting",
+    "content_type": [
+      "core",
+      "ranting"
+    ],
+    "codename": "view_ranting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Amal Usaha",
+    "content_type": [
+      "core",
+      "amalusaha"
+    ],
+    "codename": "add_amalusaha"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Amal Usaha",
+    "content_type": [
+      "core",
+      "amalusaha"
+    ],
+    "codename": "change_amalusaha"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Amal Usaha",
+    "content_type": [
+      "core",
+      "amalusaha"
+    ],
+    "codename": "delete_amalusaha"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Amal Usaha",
+    "content_type": [
+      "core",
+      "amalusaha"
+    ],
+    "codename": "view_amalusaha"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Kategori Berita",
+    "content_type": [
+      "news",
+      "newscategory"
+    ],
+    "codename": "add_newscategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Kategori Berita",
+    "content_type": [
+      "news",
+      "newscategory"
+    ],
+    "codename": "change_newscategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Kategori Berita",
+    "content_type": [
+      "news",
+      "newscategory"
+    ],
+    "codename": "delete_newscategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Kategori Berita",
+    "content_type": [
+      "news",
+      "newscategory"
+    ],
+    "codename": "view_newscategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Berita",
+    "content_type": [
+      "news",
+      "news"
+    ],
+    "codename": "add_news"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Berita",
+    "content_type": [
+      "news",
+      "news"
+    ],
+    "codename": "change_news"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Berita",
+    "content_type": [
+      "news",
+      "news"
+    ],
+    "codename": "delete_news"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Berita",
+    "content_type": [
+      "news",
+      "news"
+    ],
+    "codename": "view_news"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Agenda",
+    "content_type": [
+      "agenda",
+      "agenda"
+    ],
+    "codename": "add_agenda"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Agenda",
+    "content_type": [
+      "agenda",
+      "agenda"
+    ],
+    "codename": "change_agenda"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Agenda",
+    "content_type": [
+      "agenda",
+      "agenda"
+    ],
+    "codename": "delete_agenda"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Agenda",
+    "content_type": [
+      "agenda",
+      "agenda"
+    ],
+    "codename": "view_agenda"
+  }
+},
+{
+  "model": "core.organizationprofile",
+  "pk": 1,
+  "fields": {
+    "created_at": "2026-11-19T18:54:45.699Z",
+    "updated_at": "2026-11-19T18:54:45.699Z",
+    "nama": "Pimpinan Cabang Muhammadiyah",
+    "nama_singkat": "",
+    "tagline": "",
+    "tentang": "",
+    "jumlah_anggota": 0,
+    "gambar_hero": "",
+    "kecamatan": "",
+    "kabupaten": "",
+    "provinsi": "",
+    "alamat": "",
+    "telepon": "",
+    "email": "",
+    "jam_kantor": "",
+    "logo": "",
+    "sejarah": "",
+    "visi": "",
+    "misi": "",
+    "instagram": "",
+    "facebook": "",
+    "youtube": "",
+    "maps_embed": ""
+  }
+}
+]

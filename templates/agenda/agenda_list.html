@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Agenda — {{ org.nama }}{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow reveal">Kegiatan</p>
+    <h1 class="reveal">Agenda Kegiatan</h1>
+    <p class="reveal">Jadwal kegiatan dan dokumentasi kegiatan yang telah terlaksana.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-tabs reveal">
+      <a class="tab {% if status == 'akan' %}active{% endif %}" href="?status=akan">Akan Datang <span class="count">{{ jumlah_akan }}</span></a>
+      <a class="tab {% if status == 'selesai' %}active{% endif %}" href="?status=selesai">Sudah Terlaksana <span class="count">{{ jumlah_selesai }}</span></a>
+    </div>
+
+    {% if page_obj.object_list %}
+      <div class="agenda-list">
+        {% for a in page_obj %}
+          <a class="agenda-row reveal" href="{{ a.get_absolute_url }}">
+            <div class="agenda-date"><strong>{{ a.tanggal_mulai|date:"d" }}</strong><span>{{ a.tanggal_mulai|date:"M Y" }}</span></div>
+            <div class="agenda-info">
+              <h3>{{ a.judul }}</h3>
+              <p><i class="bi bi-geo-alt"></i> {{ a.lokasi }} <span class="dot"></span> <i class="bi bi-clock"></i> {{ a.tanggal_mulai|date:"H:i" }} WIB</p>
+            </div>
+            <span class="status-chip {{ a.status_kegiatan }}">{{ a.label_status }}</span>
+          </a>
+        {% endfor %}
+      </div>
+      {% include "partials/pagination.html" %}
+    {% else %}
+      <div class="empty-state reveal">
+        <i class="bi bi-calendar-x"></i>
+        <h3>Belum ada agenda pada kategori ini</h3>
+        <p>Jadwal akan diumumkan setelah tersedia.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

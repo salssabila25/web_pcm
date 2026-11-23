@@ -1,0 +1,107 @@
+{% load static %}
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ org.nama }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Website resmi {{ org.nama }}{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-pcm" id="navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'core:home' %}">
+        <img src="{% static 'images/logo-muhammadiyah.png' %}" alt="Logo Muhammadiyah" class="brand-logo">
+        <span class="brand-text">
+          <strong>{{ org.nama|truncatechars:28 }}</strong>
+          <small>{{ org.wilayah|default:"PCM Banjarsari" }}</small>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Buka navigasi">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'core:home' %}">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'core:profile' %}">Profil</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.namespace == 'news' %}active{% endif %}" href="{% url 'news:list' %}">Berita</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.namespace == 'agenda' %}active{% endif %}" href="{% url 'agenda:list' %}">Agenda</a></li>
+          <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'core:contact' %}">Kontak</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-pcm btn-sm" href="{% url 'core:contact' %}"><i class="bi bi-send me-1"></i>Kirim Pesan</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+    <div class="toast-stack" aria-live="polite">
+      {% for message in messages %}
+        <div class="pcm-toast {{ message.tags }}" role="status">
+          <i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i>
+          <span>{{ message }}</span>
+          <button type="button" class="toast-close" aria-label="Tutup">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer-pcm">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img src="{% static 'images/logo-muhammadiyah.png' %}" alt="Logo Muhammadiyah" class="brand-logo footer-logo">
+            <strong>{{ org.nama }}</strong>
+          </div>
+          <p class="footer-desc">
+            Website informasi PCM Banjarsari, Surakarta. Website ini dikembangkan sebagai proyek tugas perkuliahan
+            dan bukan merupakan website resmi Pimpinan Cabang Muhammadiyah.
+          </p>
+          <div class="d-flex gap-2">
+            {% if org.instagram %}<a class="social-btn" href="{{ org.instagram }}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>{% endif %}
+            {% if org.facebook %}<a class="social-btn" href="{{ org.facebook }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>{% endif %}
+            {% if org.youtube %}<a class="social-btn" href="{{ org.youtube }}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>{% endif %}
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <h3 class="footer-title">Navigasi</h3>
+          <ul class="footer-links">
+            <li><a href="{% url 'core:profile' %}">Profil Organisasi</a></li>
+            <li><a href="{% url 'news:list' %}">Berita</a></li>
+            <li><a href="{% url 'agenda:list' %}">Agenda Kegiatan</a></li>
+            <li><a href="{% url 'core:contact' %}">Kontak &amp; Aspirasi</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-4">
+          <h3 class="footer-title">Kontak</h3>
+          <ul class="footer-contact">
+            {% if org.alamat %}<li><i class="bi bi-geo-alt"></i><span>{{ org.alamat }}</span></li>{% endif %}
+            {% if org.telepon %}<li><i class="bi bi-telephone"></i><span>{{ org.telepon }}</span></li>{% endif %}
+            {% if org.email %}<li><i class="bi bi-envelope"></i><span>{{ org.email }}</span></li>{% endif %}
+            {% if org.jam_kantor %}<li><i class="bi bi-clock"></i><span>{{ org.jam_kantor }}</span></li>{% endif %}
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; {% now "Y" %} Proyek tugas kuliah</span>
+        <span>Dibangun dengan Django &middot; Data organisasi nyata</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Kontak & Aspirasi — {{ org.nama }}{% endblock %}
+{% block meta_description %}Sampaikan pertanyaan, saran, atau aspirasi kepada {{ org.nama }}.{% endblock %}
+
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow reveal">Layanan Masyarakat</p>
+    <h1 class="reveal">Kontak &amp; Aspirasi</h1>
+    <p class="reveal">Sampaikan pertanyaan, saran, atau permohonan informasi kepada pengurus {{ org.nama }}.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="content-card reveal">
+          <h2>Informasi Kontak</h2>
+
+          <ul class="contact-list">
+            <li>
+              <i class="bi bi-geo-alt" aria-hidden="true"></i>
+              <span><strong>Alamat</strong><br>Gedung Wisma Musholla Pemuda, Jl. Jageran No. 10, Ketelan, Banjarsari, Kota Surakarta</span>
+            </li>
+            <li>
+              <i class="bi bi-telephone" aria-hidden="true"></i>
+              <span>
+                <strong>Telepon/WA resmi</strong><br>
+                <a href="tel:+6285642223008">085642223008</a>
+                &middot;
+                <a href="https://wa.me/6285642223008" target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
+              </span>
+            </li>
+          </ul>
+
+          {% if org.maps_embed %}
+            <div class="map-embed">
+              <iframe src="{{ org.maps_embed }}" loading="lazy" title="Peta lokasi kantor {{ org.nama }}"></iframe>
+            </div>
+          {% endif %}
+
+          <div class="privacy-note">
+            <i class="bi bi-shield-check"></i>
+            <span>Pesan Anda tersimpan aman dan hanya dapat dibaca oleh pengurus melalui dashboard administrasi.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <form method="post" class="content-card contact-form reveal" novalidate>
+          {% csrf_token %}
+          {{ form.website }}
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.nama.id_for_label }}">Nama</label>
+              {{ form.nama }}
+              {% for error in form.nama.errors %}
+                <div class="field-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+              {{ form.email }}
+              {% for error in form.email.errors %}
+                <div class="field-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.telepon.id_for_label }}">
+                Telepon <span class="muted">(opsional)</span>
+              </label>
+              {{ form.telepon }}
+              {% for error in form.telepon.errors %}
+                <div class="field-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.subjek.id_for_label }}">Subjek</label>
+              {{ form.subjek }}
+              {% for error in form.subjek.errors %}
+                <div class="field-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="{{ form.pesan.id_for_label }}">Pesan</label>
+              {{ form.pesan }}
+              {% for error in form.pesan.errors %}
+                <div class="field-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="col-12 d-flex align-items-center gap-3 flex-wrap">
+              <button class="btn btn-pcm" type="submit">
+                <i class="bi bi-send me-1"></i>Kirim Pesan
+              </button>
+              <span class="muted small">Kami akan menindaklanjuti melalui kontak yang Anda berikan.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

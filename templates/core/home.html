@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Beranda — {{ org.nama }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-slide is-active"><img src="{% static 'images/latar belakang 1.jpeg' %}" alt=""></div>
+    <div class="hero-slide"><img src="{% static 'images/latar belakang 2.jpeg' %}" alt=""></div>
+    <div class="hero-slide"><img src="{% static 'images/latar belakang 3.jpeg' %}" alt=""></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="hero-eyebrow reveal">Website Resmi PCM Banjarsari</p>
+        <h1 class="hero-title reveal">{{ org.nama }}</h1>
+        <p class="hero-lead reveal">{{ org.wilayah|default:"Melayani umat melalui pendidikan, sosial, dan dakwah berkemajuan." }}</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-pcm btn-lg" href="{% url 'core:profile' %}">Kenali Organisasi <i class="bi bi-arrow-right"></i></a>
+          <a class="btn btn-ghost btn-lg" href="{% url 'agenda:list' %}"><i class="bi bi-calendar-event me-1"></i>Lihat Agenda</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-panel reveal">
+          <div class="panel-head"><i class="bi bi-broadcast"></i> Informasi Cabang</div>
+          <div class="panel-stats">
+            <div><strong>{{ jumlah_pengurus }}</strong><span>Pengurus Aktif</span></div>
+            <div><strong>{{ jumlah_bidang }}</strong><span>Majelis / Bidang</span></div>
+          </div>
+          <div class="panel-note">
+            <i class="bi bi-info-circle"></i>
+            <span>Seluruh konten dikelola langsung oleh pengurus melalui dashboard.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Kabar Cabang</p>
+        <h2>Berita Terbaru</h2>
+      </div>
+      <a class="link-all" href="{% url 'news:list' %}">Semua berita <i class="bi bi-arrow-right"></i></a>
+    </div>
+    {% if berita %}
+      <div class="row g-4">
+        {% for b in berita %}
+          <div class="col-md-6 col-lg-4">{% include "partials/news_card.html" with berita=b %}</div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state reveal">
+        <i class="bi bi-newspaper"></i>
+        <h3>Berita sedang disiapkan</h3>
+        <p>Pengurus belum mempublikasikan berita. Konten akan tampil di sini setelah tersedia.</p>
+        <a class="btn btn-outline-pcm" href="/admin/">Kelola lewat admin</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Agenda</p>
+        <h2>Kegiatan Terdekat</h2>
+      </div>
+      <a class="link-all" href="{% url 'agenda:list' %}">Semua agenda <i class="bi bi-arrow-right"></i></a>
+    </div>
+    {% if agenda %}
+      <div class="agenda-list">
+        {% for a in agenda %}
+          <a class="agenda-row reveal" href="{{ a.get_absolute_url }}">
+            <div class="agenda-date"><strong>{{ a.tanggal_mulai|date:"d" }}</strong><span>{{ a.tanggal_mulai|date:"M Y" }}</span></div>
+            <div class="agenda-info">
+              <h3>{{ a.judul }}</h3>
+              <p><i class="bi bi-geo-alt"></i> {{ a.lokasi }} <span class="dot"></span> <i class="bi bi-clock"></i> {{ a.tanggal_mulai|date:"H:i" }} WIB</p>
+            </div>
+            <span class="status-chip {{ a.status_kegiatan }}">{{ a.label_status }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state reveal">
+        <i class="bi bi-calendar-x"></i>
+        <h3>Belum ada agenda terdekat</h3>
+        <p>Jadwal kegiatan akan diumumkan di sini. Silakan kembali lagi nanti.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Struktur</p>
+        <h2>Majelis &amp; Bidang</h2>
+      </div>
+      <a class="link-all" href="{% url 'core:profile' %}">Lihat struktur <i class="bi bi-arrow-right"></i></a>
+    </div>
+    {% if divisions %}
+      <div class="row g-3">
+        {% for d in divisions %}
+          <div class="col-6 col-md-4 col-lg-2">
+            <div class="division-tile reveal">
+              <i class="bi bi-diagram-3"></i>
+              <span>{{ d.nama }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state reveal">
+        <i class="bi bi-diagram-3"></i>
+        <h3>Struktur sedang disiapkan</h3>
+        <p>Daftar majelis dan bidang akan tampil setelah diisi oleh pengurus.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div>
+        <h2>Punya pertanyaan atau aspirasi?</h2>
+        <p>Sampaikan pesan kepada pengurus. Setiap pesan masuk dicatat dan ditindaklanjuti.</p>
+      </div>
+      <a class="btn btn-pcm btn-lg" href="{% url 'core:contact' %}"><i class="bi bi-chat-dots me-1"></i>Hubungi Kami</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

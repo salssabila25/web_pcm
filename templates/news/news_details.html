@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ berita.judul }} — {{ org.nama }}{% endblock %}
+{% block content %}
+<article>
+  <header class="article-header">
+    <div class="container narrow">
+      <a class="news-badge static" href="{% url 'news:category' berita.kategori.slug %}">{{ berita.kategori.nama }}</a>
+      <h1 class="reveal">{{ berita.judul }}</h1>
+      <div class="article-meta reveal">
+        <span><i class="bi bi-calendar3"></i> {{ berita.published_at|date:"d F Y" }}</span>
+        <span><i class="bi bi-person"></i> {{ berita.penulis.get_full_name|default:berita.penulis.username|default:"Redaksi" }}</span>
+      </div>
+    </div>
+  </header>
+  <div class="container narrow">
+    {% if berita.gambar %}<img class="article-cover reveal" src="{{ berita.gambar.url }}" alt="{{ berita.judul }}">{% endif %}
+    <div class="article-body reveal">{{ berita.isi|linebreaks }}</div>
+    <a class="btn btn-outline-pcm mt-4" href="{% url 'news:list' %}"><i class="bi bi-arrow-left me-1"></i>Kembali ke daftar berita</a>
+  </div>
+</article>
+
+{% if terkait %}
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal"><div><p class="eyebrow">Lainnya</p><h2>Berita Terkait</h2></div></div>
+    <div class="row g-4">
+      {% for b in terkait %}
+        <div class="col-md-6 col-lg-4">{% include "partials/news_card.html" with berita=b %}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

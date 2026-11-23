@@ -1,0 +1,9 @@
+<div class="person-card reveal">
+  <div class="person-photo">
+    {% if p.foto %}<img src="{{ p.foto.url }}" alt="Foto {{ p.nama }}" loading="lazy">
+    {% else %}<span class="person-initial">{{ p.nama|slice:":1" }}</span>{% endif %}
+  </div>
+  <h4>{{ p.nama }}</h4>
+  <p class="person-role">{{ p.jabatan }}</p>
+  {% if p.periode %}<p class="person-period">{{ p.periode }}</p>{% endif %}
+</div>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ agenda.judul }} — {{ org.nama }}{% endblock %}
+{% block content %}
+<header class="article-header">
+  <div class="container narrow">
+    <span class="status-chip {{ agenda.status_kegiatan }}">{{ agenda.label_status }}</span>
+    <h1 class="reveal">{{ agenda.judul }}</h1>
+  </div>
+</header>
+<div class="container narrow">
+  <div class="agenda-detail-card reveal">
+    <div class="row g-3">
+      <div class="col-sm-6"><div class="detail-item"><i class="bi bi-calendar-event"></i><div><span>Mulai</span><strong>{{ agenda.tanggal_mulai|date:"l, d F Y · H:i" }} WIB</strong></div></div></div>
+      {% if agenda.tanggal_selesai %}
+      <div class="col-sm-6"><div class="detail-item"><i class="bi bi-calendar-check"></i><div><span>Selesai</span><strong>{{ agenda.tanggal_selesai|date:"l, d F Y · H:i" }} WIB</strong></div></div></div>
+      {% endif %}
+      <div class="col-sm-6"><div class="detail-item"><i class="bi bi-geo-alt"></i><div><span>Lokasi</span><strong>{{ agenda.lokasi }}</strong></div></div></div>
+      {% if agenda.penyelenggara %}
+      <div class="col-sm-6"><div class="detail-item"><i class="bi bi-diagram-3"></i><div><span>Penyelenggara</span><strong>{{ agenda.penyelenggara.nama }}</strong></div></div></div>
+      {% endif %}
+    </div>
+  </div>
+  {% if agenda.poster %}<img class="article-cover reveal" src="{{ agenda.poster.url }}" alt="Poster {{ agenda.judul }}">{% endif %}
+  <div class="article-body reveal">{{ agenda.deskripsi|linebreaks }}</div>
+  <a class="btn btn-outline-pcm mt-4" href="{% url 'agenda:list' %}"><i class="bi bi-arrow-left me-1"></i>Kembali ke agenda</a>
+</div>
+{% endblock %}

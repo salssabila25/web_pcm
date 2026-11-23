@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Kontak — {{ org.nama }}{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow reveal">Layanan Masyarakat</p>
+    <h1 class="reveal">Kontak &amp; Aspirasi</h1>
+    <p class="reveal">Sampaikan pertanyaan, saran, atau permohonan informasi kepada pengurus.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="content-card reveal">
+          <h2>Informasi Kontak</h2>
+          <ul class="contact-list">
+            {% if org.alamat %}<li><i class="bi bi-geo-alt"></i><span>{{ org.alamat|linebreaksbr }}</span></li>{% endif %}
+            {% if org.telepon %}<li><i class="bi bi-telephone"></i><span>{{ org.telepon }}</span></li>{% endif %}
+            {% if org.email %}<li><i class="bi bi-envelope"></i><span>{{ org.email }}</span></li>{% endif %}
+            {% if org.jam_kantor %}<li><i class="bi bi-clock"></i><span>{{ org.jam_kantor }}</span></li>{% endif %}
+          </ul>
+          <div class="privacy-note">
+            <i class="bi bi-shield-check"></i>
+            <span>Pesan Anda tersimpan aman dan hanya dapat dibaca oleh pengurus melalui dashboard.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <form method="post" class="content-card contact-form reveal" novalidate>
+          {% csrf_token %}
+          <div style="display:none">{{ form.website }}</div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.nama.id_for_label }}">Nama</label>
+              {{ form.nama }}
+              {% for e in form.nama.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+              {{ form.email }}
+              {% for e in form.email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.telepon.id_for_label }}">Telepon <span class="muted">(opsional)</span></label>
+              {{ form.telepon }}
+              {% for e in form.telepon.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.subjek.id_for_label }}">Subjek</label>
+              {{ form.subjek }}
+              {% for e in form.subjek.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="{{ form.pesan.id_for_label }}">Pesan</label>
+              {{ form.pesan }}
+              {% for e in form.pesan.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="col-12 d-flex align-items-center gap-3 flex-wrap">
+              <button class="btn btn-pcm" type="submit"><i class="bi bi-send me-1"></i>Kirim Pesan</button>
+              <span class="muted small">Kami akan menindaklanjuti melalui kontak yang Anda berikan.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+<article class="news-card reveal">
+  <a class="news-thumb" href="{{ berita.get_absolute_url }}">
+    {% if berita.gambar %}
+      <img src="{{ berita.gambar.url }}" alt="{{ berita.judul }}" loading="lazy">
+    {% else %}
+      <span class="thumb-fallback"><i class="bi bi-newspaper"></i></span>
+    {% endif %}
+    <span class="news-badge">{{ berita.kategori.nama }}</span>
+  </a>
+  <div class="news-body">
+    <div class="news-meta">
+      <span><i class="bi bi-calendar3"></i> {{ berita.published_at|date:"d M Y" }}</span>
+      <span><i class="bi bi-person"></i> {{ berita.penulis.get_full_name|default:berita.penulis.username|default:"Redaksi" }}</span>
+    </div>
+    <h3><a href="{{ berita.get_absolute_url }}">{{ berita.judul }}</a></h3>
+    <p>{{ berita.ringkasan|default:berita.isi|truncatechars:120 }}</p>
+    <a class="read-more" href="{{ berita.get_absolute_url }}">Baca selengkapnya <i class="bi bi-arrow-right"></i></a>
+  </div>
+</article>

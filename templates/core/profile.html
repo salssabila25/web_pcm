@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block title %}Profil — {{ org.nama }}{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow reveal">Tentang Kami</p>
+    <h1 class="reveal">Profil Organisasi</h1>
+    <p class="reveal">{{ org.nama }}{% if org.wilayah %} — {{ org.wilayah }}{% endif %}</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="content-card reveal">
+          <h2>Sejarah</h2>
+          {% if org.sejarah %}
+            <div class="history-content mt-3">{{ org.sejarah|linebreaks }}</div>
+          {% else %}
+          <h3 class="h5 mt-3 mb-4">Akar Sejarah di Surakarta &amp; Wilayah Banjarsari</h3>
+          <div class="history-timeline">
+            <section class="history-entry">
+              <h4 class="h6">Cikal Bakal Gerakan (1917-1922)</h4>
+              <p>
+                Dakwah K.H. Ahmad Dahlan dan tokoh lokal seperti Haji Misbah serta Harsolumakso mulai berkembang
+                melalui pengajian rutin, termasuk di kawasan Keprabon Tengah. Karena aturan kolonial Belanda,
+                gerakan ini sempat menggunakan nama SATV (<em>Siddiq Amanah Tabligh Vathonah</em>) sebelum resmi
+                menjadi cabang Muhammadiyah di Surakarta pada awal 1920-an.
+              </p>
+            </section>
+            <section class="history-entry">
+              <h4 class="h6">Pionir Pendidikan (1935)</h4>
+              <p>
+                Salah satu tonggak amal usaha di wilayah Banjarsari adalah berdirinya sekolah HIS Muhammadiyah
+                pada tahun 1935 yang kemudian dikenal sebagai SD Muhammadiyah 1 Ketelan Surakarta.
+              </p>
+            </section>
+            <section class="history-entry">
+              <h4 class="h6">Pembagian Wilayah Cabang</h4>
+              <p>
+                Di Kota Surakarta, jumlah Pimpinan Cabang Muhammadiyah lebih banyak daripada jumlah kecamatan
+                administratif. Wilayah Kecamatan Banjarsari terbagi ke dalam dua cabang:
+              </p>
+              <ul class="mb-0">
+                <li>
+                  <strong>PCM Banjarsari (bagian selatan):</strong> ranting Keprabon, Kestalan, Punggawan,
+                  Ketelan, Gilingan, Setabelan, dan Timuran.
+                </li>
+                <li>
+                  <strong>PCM Solo Utara (bagian utara):</strong> ranting Kadipiro, Banyuanyar, Nusukan, Sumber,
+                  dan sekitarnya.
+                </li>
+              </ul>
+            </section>
+          </div>
+          {% endif %}
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-md-6">
+            <div class="content-card vm-card reveal">
+              <span class="vm-icon"><i class="bi bi-eye"></i></span>
+              <h2>Visi</h2>
+              {% if org.visi %}{{ org.visi|linebreaks }}{% else %}<p class="muted">Visi akan dimuat setelah data resmi tersedia.</p>{% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="content-card vm-card reveal">
+              <span class="vm-icon"><i class="bi bi-bullseye"></i></span>
+              <h2>Misi</h2>
+              {% if org.misi %}{{ org.misi|linebreaks }}{% else %}<p class="muted">Misi akan dimuat setelah data resmi tersedia.</p>{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <aside class="content-card contact-card reveal">
+          <h2>Kantor &amp; Kontak</h2>
+          <ul class="contact-list">
+            {% if org.alamat %}<li><i class="bi bi-geo-alt"></i><span>{{ org.alamat|linebreaksbr }}</span></li>{% endif %}
+            {% if org.telepon %}<li><i class="bi bi-telephone"></i><span>{{ org.telepon }}</span></li>{% endif %}
+            {% if org.email %}<li><i class="bi bi-envelope"></i><span>{{ org.email }}</span></li>{% endif %}
+            {% if org.jam_kantor %}<li><i class="bi bi-clock"></i><span>{{ org.jam_kantor }}</span></li>{% endif %}
+          </ul>
+          {% if org.maps_embed %}
+            <div class="map-embed"><iframe src="{{ org.maps_embed }}" loading="lazy" title="Peta lokasi kantor"></iframe></div>
+          {% endif %}
+          <a class="btn btn-pcm w-100 mt-3" href="{% url 'core:contact' %}">Kirim Pesan</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">Administrasi</p><h2>Kesekretariatan</h2></div>
+    </div>
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="content-card reveal h-100">
+          <span class="vm-icon"><i class="bi bi-geo-alt"></i></span>
+          <h3 class="h6">Alamat Sekretariat</h3>
+          {% if org.alamat %}<p class="muted mb-0">{{ org.alamat|linebreaksbr }}</p>{% else %}<p class="muted mb-0">Alamat sekretariat belum tersedia.</p>{% endif %}
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="content-card reveal h-100">
+          <span class="vm-icon"><i class="bi bi-telephone"></i></span>
+          <h3 class="h6">Telepon</h3>
+          {% if org.telepon %}<p class="muted mb-0">{{ org.telepon }}</p>{% else %}<p class="muted mb-0">Nomor telepon belum tersedia.</p>{% endif %}
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="content-card reveal h-100">
+          <span class="vm-icon"><i class="bi bi-envelope"></i></span>
+          <h3 class="h6">Email</h3>
+          {% if org.email %}<p class="muted mb-0">{{ org.email }}</p>{% else %}<p class="muted mb-0">Email sekretariat belum tersedia.</p>{% endif %}
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="content-card reveal h-100">
+          <span class="vm-icon"><i class="bi bi-clock"></i></span>
+          <h3 class="h6">Jam Pelayanan</h3>
+          {% if org.jam_kantor %}<p class="muted mb-0">{{ org.jam_kantor }}</p>{% else %}<p class="muted mb-0">Jam pelayanan belum tersedia.</p>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head reveal">
+      <div><p class="eyebrow">Kepengurusan</p><h2>Struktur &amp; Pengurus</h2></div>
+    </div>
+    {% if leaders %}
+      <div class="row g-4 mb-4">
+        {% for p in leaders %}
+          <div class="col-6 col-md-4 col-lg-3">{% include "partials/person_card.html" with p=p %}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% for g in groups %}
+      {% if g.members %}
+        <div class="group-block reveal">
+          <h3 class="group-title"><i class="bi bi-diagram-3"></i> {{ g.division.nama }}</h3>
+          <div class="row g-4">
+            {% for p in g.members %}
+              <div class="col-6 col-md-4 col-lg-3">{% include "partials/person_card.html" with p=p %}</div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% if not leaders and not groups %}
+      <div class="empty-state reveal">
+        <i class="bi bi-people"></i>
+        <h3>Data pengurus sedang disiapkan</h3>
+        <p>Struktur kepengurusan akan tampil setelah diisi oleh pengurus.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-alt directory-section">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6">
+        <div class="section-head directory-heading reveal">
+          <span class="directory-heading-icon" aria-hidden="true"><i class="bi bi-building"></i></span>
+          <div>
+            <p class="eyebrow">Layanan &amp; Pengabdian</p>
+            <h2>Amal Usaha</h2>
+            <p class="directory-heading-desc">Unit layanan dan pengabdian di lingkungan PCM.</p>
+          </div>
+        </div>
+        {% for a in amal_usaha_list %}
+          <article class="content-card directory-card reveal mb-4">
+            <div class="directory-card-body">
+              <h3>{{ a.nama }}</h3>
+              <div class="directory-tags">
+                <span class="directory-tag">{{ a.get_jenis_display }}</span>
+                {% if a.ranting %}<span class="directory-tag directory-tag-muted">Ranting {{ a.ranting.nama }}</span>{% endif %}
+              </div>
+              {% if a.deskripsi %}<p class="directory-description">{{ a.deskripsi|truncatewords:30 }}</p>{% endif %}
+              {% if a.alamat or a.pimpinan or a.telepon %}
+                <ul class="contact-list directory-details">
+                  {% if a.alamat %}<li><i class="bi bi-geo-alt" aria-hidden="true"></i><span>{{ a.alamat }}</span></li>{% endif %}
+                  {% if a.pimpinan %}<li><i class="bi bi-person" aria-hidden="true"></i><span>{{ a.pimpinan }}</span></li>{% endif %}
+                  {% if a.telepon %}<li><i class="bi bi-telephone" aria-hidden="true"></i><span>{{ a.telepon }}</span></li>{% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          </article>
+        {% empty %}
+          <div class="empty-state directory-empty reveal">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <h3>Data amal usaha belum tersedia</h3>
+            <p>Informasi amal usaha akan ditampilkan setelah tersedia.</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-lg-6">
+        <div class="section-head directory-heading reveal">
+          <span class="directory-heading-icon" aria-hidden="true"><i class="bi bi-diagram-3"></i></span>
+          <div>
+            <p class="eyebrow">Wilayah Kerja</p>
+            <h2>Ranting</h2>
+            <p class="directory-heading-desc">Jaringan cabang yang melayani masyarakat di tingkat wilayah.</p>
+          </div>
+        </div>
+        {% for r in ranting_list %}
+          <article class="content-card directory-card reveal mb-4">
+            {% if r.foto %}
+              <img class="directory-card-image" src="{{ r.foto.url }}" alt="Foto {{ r.nama }}" loading="lazy">
+            {% endif %}
+            <div class="directory-card-body">
+              <h3>{{ r.nama }}</h3>
+              {% if r.desa_kelurahan or r.kecamatan %}
+                <p class="directory-location">
+                  <i class="bi bi-geo-alt" aria-hidden="true"></i>
+                  <span>{{ r.desa_kelurahan }}{% if r.kecamatan %}{% if r.desa_kelurahan %}, {% endif %}Kec. {{ r.kecamatan }}{% endif %}</span>
+                </p>
+              {% endif %}
+              {% if r.deskripsi %}<p class="directory-description">{{ r.deskripsi|truncatewords:30 }}</p>{% endif %}
+              {% if r.ketua or r.alamat or r.telepon or r.email %}
+                <ul class="contact-list directory-details">
+                  {% if r.ketua %}<li><i class="bi bi-person" aria-hidden="true"></i><span>Ketua: {{ r.ketua }}</span></li>{% endif %}
+                  {% if r.alamat %}<li><i class="bi bi-geo-alt" aria-hidden="true"></i><span>{{ r.alamat }}</span></li>{% endif %}
+                  {% if r.telepon %}<li><i class="bi bi-telephone" aria-hidden="true"></i><span>{{ r.telepon }}</span></li>{% endif %}
+                  {% if r.email %}<li><i class="bi bi-envelope" aria-hidden="true"></i><span>{{ r.email }}</span></li>{% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          </article>
+        {% empty %}
+          <div class="empty-state directory-empty reveal">
+            <i class="bi bi-diagram-3" aria-hidden="true"></i>
+            <h3>Data ranting belum tersedia</h3>
+            <p>Informasi ranting akan ditampilkan setelah tersedia.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
