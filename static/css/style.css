@@ -661,11 +661,22 @@ input, textarea, select { font-family: var(--font); }
   border-radius: var(--r-lg);
   padding: 1.3rem 1rem;
   text-align: center;
-  display: flex; flex-direction: column; gap: .5rem; align-items: center;
+  display: flex; flex-direction: column; gap: .5rem; align-items: center; justify-content: center;
   font-weight: 700; font-size: .82rem; color: var(--slate-700);
   box-shadow: var(--sh-xs);
   transition: transform var(--dur), border-color var(--dur), box-shadow var(--dur);
   height: 100%;
+  min-height: 176px;
+}
+.division-tile-trigger {
+  width: 100%;
+  min-width: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+.division-tile-trigger:focus-visible {
+  outline: 3px solid var(--g400);
+  outline-offset: 3px;
 }
 .division-tile:hover {
   transform: translateY(-4px);
@@ -680,6 +691,55 @@ input, textarea, select { font-family: var(--font); }
   color: var(--g600); font-size: 1.2rem;
   border: 1px solid var(--g100);
 }
+.division-tile-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.7em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.division-tile-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  color: var(--g600);
+  font-size: .7rem;
+  font-weight: 700;
+}
+
+.division-modal .modal-content {
+  overflow: hidden;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+}
+.division-modal .modal-header,
+.division-modal .modal-body,
+.division-modal .modal-footer { padding: 1.25rem 1.5rem; }
+.division-modal .modal-header,
+.division-modal .modal-footer { border-color: var(--slate-200); }
+.division-modal .modal-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+}
+.division-modal-type {
+  margin: 0 0 .25rem;
+  color: var(--g600);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.division-modal .modal-body {
+  color: var(--slate-700);
+  font-size: .92rem;
+  line-height: 1.75;
+}
+.division-modal .modal-body p:last-child { margin-bottom: 0; }
+.division-modal-empty { color: var(--slate-500); }
 
 /* ── Content card ─────────────────────────────────────────── */
 .content-card {

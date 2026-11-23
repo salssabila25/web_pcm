@@ -239,16 +239,46 @@
     {% if divisions %}
       <div class="row g-3">
         {% for d in divisions %}
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="division-tile reveal">
+          <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <button class="division-tile division-tile-trigger reveal w-100" type="button"
+                    data-bs-toggle="modal" data-bs-target="#division-modal-{{ d.pk }}"
+                    aria-label="Lihat deskripsi {{ d.nama }}">
               <div class="division-tile-icon">
                 <i class="bi bi-diagram-3"></i>
               </div>
-              <span>{{ d.nama }}</span>
-            </div>
+              <span class="division-tile-title">{{ d.nama }}</span>
+              <span class="division-tile-hint"><i class="bi bi-info-circle"></i> Lihat deskripsi</span>
+            </button>
           </div>
         {% endfor %}
       </div>
+
+      {% for d in divisions %}
+          <div class="modal fade division-modal" id="division-modal-{{ d.pk }}" tabindex="-1"
+               aria-labelledby="division-modal-title-{{ d.pk }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div>
+                    <p class="division-modal-type">{{ d.get_jenis_display }}</p>
+                    <h2 class="modal-title" id="division-modal-title-{{ d.pk }}">{{ d.nama }}</h2>
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                  {% if d.deskripsi %}
+                    {{ d.deskripsi|linebreaks }}
+                  {% else %}
+                    <p class="division-modal-empty">Deskripsi untuk {{ d.nama }} belum tersedia.</p>
+                  {% endif %}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-pcm" data-bs-dismiss="modal">Tutup</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
     {% else %}
       <div class="empty-state reveal">
         <i class="bi bi-diagram-3"></i>
