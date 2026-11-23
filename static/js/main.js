@@ -1,10 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ── Navbar scroll effect ─────────────────────────────── */
+  /* ── Scroll controls ──────────────────────────────────── */
   const navbar = document.getElementById("navbar");
-  const onScroll = () => navbar.classList.toggle("scrolled", window.scrollY > 30);
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  const progressBar = document.getElementById("scroll-progress-bar");
+  const backToTop = document.getElementById("back-to-top");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let scrollFrame = 0;
+
+  const updateScrollEffects = () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      const scrollTop = window.scrollY;
+      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollRange > 0 ? Math.min(scrollTop / scrollRange, 1) : 0;
+
+      if (navbar) navbar.classList.toggle("scrolled", scrollTop > 30);
+      if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+      if (backToTop) backToTop.classList.toggle("is-visible", scrollTop > 400);
+      scrollFrame = 0;
+    });
+  };
+
+  updateScrollEffects();
+  window.addEventListener("scroll", updateScrollEffects, { passive: true });
+  window.addEventListener("resize", updateScrollEffects, { passive: true });
+
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  });
 
   /* ── Hero slideshow ───────────────────────────────────── */
   const heroSlides = document.querySelectorAll(".hero-slide");
@@ -28,6 +51,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
 
   document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+  /* ── Homepage stat counters ───────────────────────────── */
+  const counters = document.querySelectorAll("[data-count]");
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      counterObserver.unobserve(entry.target);
+
+      const target = Number(entry.target.dataset.count);
+      if (!Number.isSafeInteger(target) || target < 0) return;
+      const format = (value) => new Intl.NumberFormat("id-ID").format(value);
+
+      if (prefersReducedMotion || target === 0) {
+        entry.target.textContent = format(target);
+        return;
+      }
+
+      const duration = 900;
+      let startTime;
+      const animate = (timestamp) => {
+        if (startTime === undefined) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = 1 - (1 - progress) ** 3;
+        entry.target.textContent = format(Math.round(target * eased));
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+
+      entry.target.textContent = "0";
+      requestAnimationFrame(animate);
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach((counter) => counterObserver.observe(counter));
 
   /* ── Toast auto-dismiss ───────────────────────────────── */
   document.querySelectorAll(".toast-close").forEach((btn) => {

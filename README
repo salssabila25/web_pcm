@@ -6,7 +6,7 @@ tanpa mengubah kode.
 
 ## Teknologi
 
-- Python 3.12 + Django 6.1
+- Python 3.12 + Django 5.2
 - uv (manajemen dependensi, `pyproject.toml` + `uv.lock`)
 - SQLite (pengembangan lokal)
 - Bootstrap 5 + CSS/JS kustom (tema biru–putih identitas PCM)
