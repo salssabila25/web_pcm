@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary",
+    "cloudinary_storage",
     "core",
     "news",
     "agenda",
@@ -79,12 +81,18 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 FIXTURE_DIRS = [BASE_DIR / "fixtures"]
 
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME", default="igy6gsbq"),
+    "API_KEY": env("CLOUDINARY_API_KEY", default="576845898845479"),
+    "API_SECRET": env("CLOUDINARY_API_SECRET", default="muYFpHZG9pEtIvlYuwROAVM4k_E"),
+}
+
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
 }
 

@@ -1,4 +1,5 @@
 {
+  "buildCommand": "pip install cloudinary django-cloudinary-storage && python manage.py collectstatic --noinput",
   "functions": {
     "website_pcm1/wsgi.py": {
       "maxDuration": 60
