@@ -20,8 +20,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "cloudinary",
-    "cloudinary_storage",
     "core",
     "news",
     "agenda",
@@ -86,14 +84,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
     "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
-}
-
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME", default="igy6gsbq"),
-    "API_KEY": env("CLOUDINARY_API_KEY", default="576845898845479"),
-    "API_SECRET": env("CLOUDINARY_API_SECRET", default="muYFpHZG9pEtIvlYuwROAVM4k_E"),
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
