@@ -131,26 +131,76 @@
     <div class="section-head reveal">
       <div><p class="eyebrow">Kepengurusan</p><h2>Struktur &amp; Pengurus</h2></div>
     </div>
-    {% if leaders %}
-      <div class="row g-4 mb-4">
-        {% for p in leaders %}
-          <div class="col-6 col-md-4 col-lg-3">{% include "partials/person_card.html" with p=p %}</div>
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% for g in groups %}
-      {% if g.members %}
-        <div class="group-block reveal">
-          <h3 class="group-title"><i class="bi bi-diagram-3"></i> {{ g.division.nama }}</h3>
-          <div class="row g-4">
-            {% for p in g.members %}
-              <div class="col-6 col-md-4 col-lg-3">{% include "partials/person_card.html" with p=p %}</div>
+
+    {% if chair or board or groups or members %}
+    <div class="org-tree-wrap reveal">
+      <div class="org-chart">
+        {% if chair %}
+          <div class="org-level org-level-top">
+            <div class="org-node org-node-chief">
+              {% include "partials/org_chart_person.html" with p=chair only %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if board %}
+          {% if chair %}<div class="org-chart-stem"></div>{% endif %}
+          <div class="org-level org-level-branches{% if board|length == 1 %} org-level-branches-single{% endif %}">
+            {% for p in board %}
+              <div class="org-chart-branch">
+                <div class="org-node org-node-leader">
+                  {% include "partials/org_chart_person.html" with p=p only %}
+                </div>
+              </div>
             {% endfor %}
           </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    {% if not leaders and not groups %}
+        {% endif %}
+
+        {% if groups or members %}
+          {% if chair or board %}<div class="org-chart-stem"></div>{% endif %}
+          <div class="org-level org-level-branches org-level-teams{% if not multiple_teams %} org-level-branches-single{% endif %}">
+            {% for g in groups %}
+              <div class="org-chart-branch">
+                <div class="org-team">
+                  <div class="org-division-card">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>{{ g.division.nama }}</span>
+                  </div>
+                  <div class="org-chart-stem org-chart-stem-short"></div>
+                  <div class="org-members{% if g.members|length == 1 %} org-members-single{% endif %}">
+                    {% for p in g.members %}
+                      <div class="org-node org-node-member">
+                        {% include "partials/org_chart_person.html" with p=p only %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+            {% if members %}
+              <div class="org-chart-branch">
+                <div class="org-team">
+                  <div class="org-division-card">
+                    <i class="bi bi-people"></i>
+                    <span>Anggota</span>
+                  </div>
+                  <div class="org-chart-stem org-chart-stem-short"></div>
+                  <div class="org-members{% if members|length == 1 %} org-members-single{% endif %}">
+                    {% for p in members %}
+                      <div class="org-node org-node-member">
+                        {% include "partials/org_chart_person.html" with p=p only %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
       <div class="empty-state reveal">
         <i class="bi bi-people"></i>
         <h3>Data pengurus sedang disiapkan</h3>

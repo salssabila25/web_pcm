@@ -1,0 +1,13 @@
+<div class="org-card">
+  <div class="org-photo">
+    {% if p.foto %}
+      <img src="{{ p.foto.url }}" alt="{{ p.nama }}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <span class="org-initial" style="display:none;">{{ p.nama|slice:":1" }}</span>
+    {% else %}
+      <span class="org-initial">{{ p.nama|slice:":1" }}</span>
+    {% endif %}
+  </div>
+  <div class="org-name">{{ p.nama }}</div>
+  <div class="org-role">{{ p.jabatan }}</div>
+  <div class="org-period">{% if p.periode %}{{ p.periode }}{% endif %}</div>
+</div>

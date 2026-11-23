@@ -1288,3 +1288,251 @@ input, textarea, select { font-family: var(--font); }
   .hero-bg, .hero-bg::after, .hero::before { display: none; }
   .hero-title, .hero-lead, .hero-badge { color: black !important; }
 }
+
+
+/* ============================================================
+   ORG CHART — Struktur Pengurus
+   ============================================================ */
+
+.org-tree-wrap {
+  overflow-x: auto;
+  padding: 1.5rem .5rem 2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.org-chart {
+  --chart-node-width: 164px;
+  --chart-line: var(--g300, #86efac);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: max-content;
+  padding: 1rem 1.5rem;
+}
+
+.org-level {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+}
+
+.org-level-top { width: 100%; }
+
+.org-level-branches {
+  width: max-content;
+  gap: 1rem;
+}
+
+.org-level-branches-single::before { display: none; }
+
+.org-chart-branch {
+  position: relative;
+  flex: 0 0 var(--chart-node-width);
+  padding-top: 30px;
+  text-align: center;
+}
+
+.org-level-branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(var(--chart-node-width) / 2);
+  right: calc(var(--chart-node-width) / 2);
+  border-top: 2px solid var(--chart-line);
+}
+
+.org-chart-branch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 30px;
+  border-left: 2px solid var(--chart-line);
+}
+
+.org-team {
+  position: relative;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  transform: translateX(-50%);
+}
+
+.org-chart-stem {
+  width: 2px;
+  height: 32px;
+  flex: 0 0 32px;
+  background: var(--chart-line);
+}
+
+.org-chart-stem-short {
+  height: 20px;
+  flex-basis: 20px;
+  margin: 0 auto;
+}
+
+.org-card {
+  display: flex;
+  flex-direction: column;
+  width: var(--chart-node-width);
+  padding: 0;
+  text-align: center;
+  position: relative;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.org-photo {
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
+  margin: 0 auto .7rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 4px solid var(--g500);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--g600), var(--g900));
+  box-shadow: 0 0 0 5px rgba(10, 110, 58, .1);
+}
+
+.org-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.org-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+}
+
+.org-name,
+.org-role {
+  width: 100%;
+  padding: .45rem .55rem;
+  background: var(--g700);
+  color: #fff;
+  line-height: 1.3;
+}
+
+.org-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.35rem;
+  border-radius: .55rem .55rem 0 0;
+  overflow-wrap: anywhere;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.org-role {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding-top: .1rem;
+  border-radius: 0 0 .55rem .55rem;
+  color: rgba(255, 255, 255, .82);
+  font-size: .67rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.org-period {
+  height: 1.25rem;
+  margin-top: .35rem;
+  color: var(--slate-500);
+  font-size: .68rem;
+}
+
+.org-node-chief .org-photo { border-color: var(--gold-400, #eab308); }
+
+.org-node-chief .org-name,
+.org-node-chief .org-role { background: var(--g900); }
+
+.org-node-leader .org-photo { border-color: var(--g500); }
+
+.org-division-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  align-self: stretch;
+  min-height: 40px;
+  padding: .55rem .7rem;
+  border-radius: .55rem;
+  background: var(--g600);
+  box-shadow: var(--sh-sm);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.org-division-card i { color: var(--g100); }
+
+.org-members {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: .85rem .55rem;
+  width: max-content;
+  position: relative;
+  padding-top: 24px;
+}
+
+.org-members::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(var(--chart-node-width) / 2);
+  right: calc(var(--chart-node-width) / 2);
+  border-top: 2px solid var(--chart-line);
+}
+
+.org-members-single::before { display: none; }
+
+.org-node-member {
+  position: relative;
+  flex: 0 0 var(--chart-node-width);
+  width: var(--chart-node-width);
+  padding-top: 24px;
+}
+
+.org-node-member::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 24px;
+  border-left: 2px solid var(--chart-line);
+}
+
+@media (max-width: 767.98px) {
+  .org-chart { --chart-node-width: 142px; padding-right: 1rem; padding-left: 1rem; }
+  .org-level-branches { gap: .6rem; }
+  .org-chart-stem { height: 26px; flex-basis: 26px; }
+  .org-chart-stem-short { height: 18px; flex-basis: 18px; }
+  .org-chart-branch { padding-top: 24px; }
+  .org-chart-branch::before { height: 24px; }
+  .org-photo { width: 72px; height: 72px; flex-basis: 72px; }
+  .org-members { gap: .7rem; }
+  .org-node-member { flex-basis: 116px; width: 116px; }
+}
+
+@media (max-width: 575.98px) {
+  .org-chart { --chart-node-width: 132px; }
+  .org-level-branches { gap: .35rem; }
+  .org-card { width: var(--chart-node-width); }
+  .org-node-member { flex-basis: 108px; width: 108px; }
+}
