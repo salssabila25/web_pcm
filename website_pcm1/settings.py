@@ -10,7 +10,6 @@ if (BASE_DIR / ".env").exists():
 SECRET_KEY = env("SECRET_KEY", default="dev-only-change-me-in-production")
 DEBUG = env("DEBUG")
 
-# .vercel.app selalu diizinkan
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".vercel.app"]
 
 INSTALLED_APPS = [
@@ -21,6 +20,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary",
+    "cloudinary_storage",
     "core",
     "news",
     "agenda",
@@ -80,14 +81,19 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 FIXTURE_DIRS = [BASE_DIR / "fixtures"]
 
-# Storage: static pakai WhiteNoise
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
+}
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME", default="igy6gsbq"),
+    "API_KEY": env("CLOUDINARY_API_KEY", default="576845898845479"),
+    "API_SECRET": env("CLOUDINARY_API_SECRET", default="muYFpHZG9pEtIvlYuwROAVM4k_E"),
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -99,21 +105,3 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Selamat datang di Admin PCM",
     "copyright": "PCM",
 }
-
-# Cloudinary — aktif jika env var tersedia
-_cloudinary_configured = all([
-    env("CLOUDINARY_CLOUD_NAME", default=""),
-    env("CLOUDINARY_API_KEY", default=""),
-    env("CLOUDINARY_API_SECRET", default=""),
-])
-
-if _cloudinary_configured:
-    import cloudinary
-    cloudinary.config(
-        cloud_name=env("CLOUDINARY_CLOUD_NAME"),
-        api_key=env("CLOUDINARY_API_KEY"),
-        api_secret=env("CLOUDINARY_API_SECRET"),
-    )
-    STORAGES["default"] = {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    }
