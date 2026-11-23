@@ -59,8 +59,11 @@ TEMPLATES = [
 WSGI_APPLICATION = "website_pcm1.wsgi.application"
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+    "default": env.db("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
 }
+
+# Aktifkan persistent connection untuk kurangi overhead koneksi
+DATABASES["default"]["CONN_MAX_AGE"] = 60
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

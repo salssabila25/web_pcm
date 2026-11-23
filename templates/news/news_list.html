@@ -1,27 +1,31 @@
 {% extends "base.html" %}
 {% block title %}Berita — {{ org.nama }}{% endblock %}
+
 {% block content %}
+
 <header class="page-header">
   <div class="container">
-    <p class="eyebrow reveal">Publikasi</p>
-    <h1 class="reveal">{% if kategori_aktif %}Berita: {{ kategori_aktif.nama }}{% else %}Berita{% endif %}</h1>
+    <span class="eyebrow reveal">Publikasi</span>
+    <h1 class="reveal">{% if kategori_aktif %}Berita: {{ kategori_aktif.nama }}{% else %}Berita &amp; Informasi{% endif %}</h1>
     <p class="reveal">Kabar dan dokumentasi kegiatan {{ org.nama }}.</p>
   </div>
 </header>
 
 <section class="section">
   <div class="container">
+
     <form class="search-bar reveal" method="get" action="{% url 'news:list' %}">
       <i class="bi bi-search"></i>
       <input type="search" name="q" value="{{ q }}" placeholder="Cari berita…" aria-label="Cari berita">
-      <button class="btn btn-pcm" type="submit">Cari</button>
+      <button class="btn-primary-pcm py-2 px-4" type="submit" style="font-size:.88rem;">Cari</button>
     </form>
 
     {% if categories %}
       <div class="category-pills reveal">
         <a class="pill {% if not kategori_aktif %}active{% endif %}" href="{% url 'news:list' %}">Semua</a>
         {% for c in categories %}
-          <a class="pill {% if kategori_aktif.slug == c.slug %}active{% endif %}" href="{% url 'news:category' c.slug %}">{{ c.nama }}</a>
+          <a class="pill {% if kategori_aktif.slug == c.slug %}active{% endif %}"
+             href="{% url 'news:category' c.slug %}">{{ c.nama }}</a>
         {% endfor %}
       </div>
     {% endif %}
@@ -29,7 +33,9 @@
     {% if page_obj.object_list %}
       <div class="row g-4">
         {% for b in page_obj %}
-          <div class="col-md-6 col-lg-4">{% include "partials/news_card.html" with berita=b %}</div>
+          <div class="col-md-6 col-lg-4">
+            {% include "partials/news_card.html" with berita=b %}
+          </div>
         {% endfor %}
       </div>
       {% include "partials/pagination.html" %}
@@ -37,10 +43,18 @@
       <div class="empty-state reveal">
         <i class="bi bi-search"></i>
         <h3>Tidak ada berita ditemukan</h3>
-        <p>{% if q %}Tidak ada hasil untuk “{{ q }}”. Coba kata kunci lain.{% else %}Belum ada berita yang dipublikasikan.{% endif %}</p>
-        <a class="btn btn-outline-pcm" href="{% url 'news:list' %}">Lihat semua berita</a>
+        <p>
+          {% if q %}
+            Tidak ada hasil untuk "{{ q }}". Coba kata kunci lain.
+          {% else %}
+            Belum ada berita yang dipublikasikan.
+          {% endif %}
+        </p>
+        <a class="btn-outline-pcm" href="{% url 'news:list' %}">Lihat semua berita</a>
       </div>
     {% endif %}
+
   </div>
 </section>
+
 {% endblock %}

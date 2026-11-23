@@ -10,10 +10,12 @@
   <div class="news-body">
     <div class="news-meta">
       <span><i class="bi bi-calendar3"></i> {{ berita.published_at|date:"d M Y" }}</span>
-      <span><i class="bi bi-person"></i> {{ berita.penulis.get_full_name|default:berita.penulis.username|default:"Redaksi" }}</span>
+      <span><i class="bi bi-person-circle"></i> {{ berita.penulis.get_full_name|default:berita.penulis.username|default:"Redaksi" }}</span>
     </div>
     <h3><a href="{{ berita.get_absolute_url }}">{{ berita.judul }}</a></h3>
     <p>{{ berita.ringkasan|default:berita.isi|truncatechars:120 }}</p>
-    <a class="read-more" href="{{ berita.get_absolute_url }}">Baca selengkapnya <i class="bi bi-arrow-right"></i></a>
+    <a class="read-more" href="{{ berita.get_absolute_url }}">
+      Baca selengkapnya <i class="bi bi-arrow-right"></i>
+    </a>
   </div>
 </article>
