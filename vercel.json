@@ -1,22 +1,7 @@
 {
-  "builds": [
-    {
-      "src": "website_pcm1/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.12"
-      }
+  "functions": {
+    "website_pcm1/wsgi.py": {
+      "maxDuration": 60
     }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "website_pcm1/wsgi.py"
-    }
-  ]
+  }
 }
